@@ -92,15 +92,37 @@ app.post('/RegistrarAsistencia', (req, res) => {
     const datos = leerDatos();
     const { idPersona, fecha, estado, tipo } = req.body; // tipo puede ser "Estudiante" o "Profesor"
     
-    const persona = datos[tipo.toLowerCase() + "s"].find(p => p.id === idPersona);
+    // Verifica si el campo "tipo" existe y es válido
+    if (!tipo || (tipo !== "Estudiante" && tipo !== "Profesor")) {
+        return res.status(400).send("El campo 'tipo' es obligatorio y debe ser 'Estudiante' o 'Profesor'");
+    }
+    
+    // Selecciona la colección adecuada según el tipo
+    const collection = tipo === "Estudiante" ? datos.estudiantes : datos.profesores;
+    
+    // Determina el nombre del campo de identificador basado en el tipo
+    const idField = tipo === "Estudiante" ? "idAlumno" : "idProfe";
+
+    // Busca a la persona en la colección correspondiente
+    const persona = collection.find(p => p[idField] === idPersona);
+
     if (persona) {
-        datos.asistencias.push({ id: datos.asistencias.length + 1, idPersona, fecha, estado, tipo });
+        // Verifica si el campo "asistencias" existe
+        if (!persona.asistencias) {
+            persona.asistencias = [];
+        }
+        
+        // Agrega la nueva asistencia al historial de asistencias de la persona
+        persona.asistencias.push({ fecha, estado });
+        
+        // Guarda los cambios en los datos
         escribirDatos(datos);
         res.json({ message: "Asistencia registrada" });
     } else {
         res.status(404).send(`${tipo} no encontrado`);
     }
 });
+
 
 // Obtener el historial de asistencia
 app.get('/HistorialAsistencia/:tipo/:idPersona', (req, res) => {
