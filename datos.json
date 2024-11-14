@@ -1,0 +1,79 @@
+{
+    "estudiantes": [
+        {
+            "id": 1,
+            "nombre_completo": "Lucas Zeballos",
+            "dni": 12345678,
+            "curso": "62",
+            "turno": "Vespertino",
+            "telefono": "123456789",
+            "tutores": [1], 
+            "estado": "Activo",
+            "asistencias": [
+                {"fecha": "2024-11-01", "estado": "Presente"},
+                {"fecha": "2024-11-02", "estado": "Ausente", "justificacion": "Enfermedad"}
+            ]
+        }
+    ],
+    "tutores": [
+        {
+            "id": 1,
+            "nombre_completo": "Carlos Pérez",
+            "dni": 12345678,
+            "correo_electronico": "carlos.perez@gmail.com",
+            "telefono": "123456789",
+            "vinculo": "Padre",
+            "estudiantes_asociados": [1]
+        }
+    ],
+    "profesores": [
+        {
+            "id": 1,
+            "nombre_completo": "Lucía González",
+            "dni": 21332112,
+            "especialidad": ["Tecnivas de Programacion Avanzada","Introduccion a la Programacion"],
+            "cursos": ["42", "51", "62"], 
+            "turno": "Vespertino",
+            "matricula": "555MAT",
+            "contrato": "Indefinido",
+            "telefono": "987654321",
+            "correo_electronico": "lucia.gonzalez@escuela.com",
+            "rol": "Profesor",
+            "estado": "Activo",
+            "asistencias": [
+                {"fecha": "2024-11-01", "estado": "Presente"},
+                {"fecha": "2024-11-02", "estado": "Ausente", "justificacion": "Personal"}
+            ]
+        }
+    ],
+    "eventos": [
+        {
+            "id": 1,
+            "tipo": "Feriado",
+            "descripcion": "Día del profesor",
+            "fecha": "11-09-2024"
+        },
+        {
+            "id": 2,
+            "tipo": "Feriado",
+            "descripcion": "Día de la Soberanía Nacional",
+            "fecha": "18-11-2024"
+        },
+        {
+            "id": 3,
+            "tipo": "Visita",
+            "descripcion": "Visita de la fuerza militar",
+            "fecha": "20-11-2024"
+        }
+    ],
+    "admins": [
+        {
+            "id": 1,
+            "nombre_completo": "Marta Fernández",
+            "dni": 11223344,
+            "turno": "Completo",
+            "telefono": "1122334455",
+            "correo_electronico": "marta.fernandez@escuela.com"
+        }
+    ]
+}
